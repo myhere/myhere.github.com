@@ -1,32 +1,134 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" manifest="card.appcache">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="张林的简历,Things about Lin Zhang">
+<meta name="description" content="Things about Lin Zhang">
 <meta name="author" content="myhere.2009@gmail.com">
 <title>Hello World!</title>
 <style>
 body{
   margin:0;
   background:#eee;
+
+}
+body, pre{
+  font:12px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.clearfix{
+  *zoom:1;
+}
+.clearfix:after{
+  display:block;
+  height:0;
+  clear:both;
+  content:'\20';
 }
 .name-card{
-  padding:15px;
-  width:400px;
   margin:100px auto;
+  width:400px;
+  padding:20px 30px;
   background:#333;
-  border-radius:6px;
+  -webkit-border-radius:5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius:5px;
   color:#fff;
-  font: normal 12px/18px "Microsoft YaHei", "SimSun";
+}
+.name-card a{
+  color:#fff;
+  text-decoration:none;
+}
+.name-card a:hover{
+  text-decoration:underline;
+}
+.name-card-photo{
+  float:left;
+}
+.name-card-desc{
+  float:left;
+  margin-left:10px;
+  color:#E0E0E0;
+}
+.name-card-title{
+  font-size:30px;
+  line-height:30px;
+}
+.name-card-abstract{
+  margin-top:10px;
+}
+.name-card-social{
+  margin-top:10px;
+}
+.name-card-urls-hd{
+  font-size:16px;
 }
 </style>
 </head>
 <body>
   <div class="name-card">
-    <dd>
-    <dt></dt>
-    </dd>
+    <div class="name-card-head clearfix">
+      <div class="name-card-photo">
+        <img alt="photo" src="./assets/imgs/photo.jpg" width="100" height="100" />
+      </div>
+      <div class="name-card-desc">
+        <div class="name-card-title">张林</div>
+        <div>
+<pre class="name-card-abstract">
+- myhere.2009#gmail.com
+- Frontend Developer @ taobao.com
+- html, css, js, php
+</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="name-card-social">
+      <div class="name-card-urls-hd">Where You Can Find Me:</div>
+      <ul class="name-card-urls">
+        <li><a href="http://zhangl.in" target="_blank">博客</a></li>
+        <li><a href="https://github.com/myhere" target="_blank">Github</a></li>
+        <li><a href="http://www.linkedin.com/pub/lin-zhang/24/b06/ab3" target="_blank">Linkedin</a></li>
+        <li><a href="http://weibo.com/u/1259660265" target="_blank">新浪微博</a></li>
+        <li><a href="https://plus.google.com/118052851678718848096/posts" target="_blank">Google Plus</a></li>
+        <li><a href="http://twitter.com/#!/myhere_2009" target="_blank">Twitter</a></li>
+      </ul>
+    </div>
+
+    <div class="name-card-social">
+      <div class="name-card-urls-hd">Other:</div>
+      <ul class="name-card-urls">
+        <li><a href="http://github.zhangl.in/vimwiki/wiki_html/" target="_blank" title="学习笔记">vimwiki</a></li>
+        <li><a href="http://github.zhangl.in/Vimlike-Shortcuts/demos/index.html" target="_blank" title="给你的网站加上vim一样的快捷键!">Vimlike-Shortcuts</a></li>
+      </ul>
+    </div>
   </div>
+
+<script>
+// copied form: http://slides.html5rocks.com/#app-cache
+// Check if new appcache is available, load it, and reload page.
+if (window.applicationCache) {
+  window.applicationCache.addEventListener('updateready', function(e) {
+    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+      window.applicationCache.swapCache();
+      if (confirm('A new version of this site is available. Load it?')) {
+        window.location.reload();
+      }
+    }
+  }, false);
+}
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31665252-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 </body>
 </html>
