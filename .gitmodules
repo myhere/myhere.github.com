@@ -1,0 +1,3 @@
+[submodule "ppt/vendor/impress.js"]
+	path = ppt/vendor/impress.js
+	url = git://github.com/bartaz/impress.js.git
