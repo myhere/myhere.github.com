@@ -78,15 +78,15 @@
           <section>
             <h3>开发环境</h3>
             <ul>
-              <li>本地预览, 配置一个 php 环境</li>
-              <li><a href="http://svn.app.taobao.net/repos/fed/trunk/fed/cdc/vmarkets/act_demos/2012-1111">svn</a>管理, <a href="http://scm.taobao.net/user/userIndex.htm?menuId=X003&target=configMySvnMonitorAddress.htm">scm</a> 监控 svn</li>
+              <li>本地预览</li>
               <li>模拟 tms 环境, 借用 sdk api</li>
+              <li><a href="http://svn.app.taobao.net/repos/fed/trunk/fed/cdc/vmarkets/act_demos/2012-1111">svn</a>管理, <a href="http://scm.taobao.net/user/userIndex.htm?menuId=X003&target=configMySvnMonitorAddress.htm">scm</a> 监控 svn</li>
               <li>checkout 直接开发</li>
             </ul>
           </section>
 
           <section>
-            <h3>如何开发</h3>
+            <h3>开发</h3>
             <ul>
               <li>
                 <p>模块化</p>
@@ -99,7 +99,7 @@
                   <li>会场互串</li>
                 </ul>
               </li>
-              <li>皮肤: css 覆盖 | php 变量</li>
+              <li>皮肤: css 覆盖 or php 变量</li>
               <li>模块组合页面</li>
               <li>修改放到 tms</li>
             </ul>
@@ -172,8 +172,8 @@
             <h3>性能优化</h3>
             <ol class="fragment">
               <li>全局统一 lazyload</li>
-              <li class="fragment floatInSlow">ie6 提示是否终止<a href="_ie6_damn_slow.html">脚本</a></li>
-              <li class="fragment floatInFast">Chrome</li>
+              <li class="fragment floatInSlow">ie6 提示是否终止<a href="ie6_damn_slow.html">脚本</a></li>
+              <li class="fragment floatInFast"><a href="https://developers.google.com/chrome-developer-tools/docs/cpu-profiling">Chrome</a></li>
             </ol>
           </section>
         </section>
@@ -191,7 +191,7 @@
           <ul>
             <li>无法完全模拟 tms 环境, 路径不一致, /home/admin</li>
             <li>
-              <p>没做延迟渲染, 对比去年双12, 大概 100ms </p>
+              <p>没做延迟渲染, 对比去年双12, 渲染大概慢 100ms</p>
               <ul>
                 <li><a href="http://www.html5rocks.com/en/tutorials/webperformance/basics/">performance</a></li>
                 <li>
