@@ -23,6 +23,25 @@
       document.write( '<link rel="stylesheet" href="../vendor/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
     </script>
 
+<style>
+.floatInSlow,
+.floatInFast{
+  position:relative;
+  left:200%;
+}
+.floatInSlow{
+	-webkit-transition: all 2s ease!important;
+	   -moz-transition: all 2s ease!important;
+	    -ms-transition: all 2s ease!important;
+	     -o-transition: all 2s ease!important;
+	        transition: all 2s ease!important;
+}
+.floatInSlow.visible,
+.floatInFast.visible{
+  left:0;
+}
+</style>
+
     <!--[if lt IE 9]>
     <script src="../vendor/reveal.js/lib/js/html5shiv.js"></script>
     <![endif]-->
@@ -136,44 +155,25 @@
             </ul>
           </section>
 
-          <section>
-            <h3>代码</h3>
-            <ul>
-              <li>功能按钮等用钩子, 全局统一初始化(保证不报错)</li>
-              <li>内容在一个地方填写, 不划分区块 include</li>
-              <li>
-                <p>内容展现分离 秒杀内容</p>
-                <ul>
-                  <li>方便统一修改 ui</li>
-                </ul>
-              </li>
-            </ul>
-          </section>
 
           <section>
-<style  scoped="scoped">
-.floatInSlow,
-.floatInFast{
-  position:relative;
-  left:200%;
-}
-.floatInSlow{
-	-webkit-transition: all 2s ease!important;
-	   -moz-transition: all 2s ease!important;
-	    -ms-transition: all 2s ease!important;
-	     -o-transition: all 2s ease!important;
-	        transition: all 2s ease!important;
-}
-.floatInSlow.visible,
-.floatInFast.visible{
-  left:0;
-}
-</style>
-            <h3>性能优化</h3>
+            <h3>遇到的问题</h3>
             <ol class="fragment">
-              <li>全局统一 lazyload</li>
-              <li class="fragment floatInSlow">ie6 提示是否终止<a href="ie6_damn_slow.html">脚本</a></li>
-              <li class="fragment floatInFast"><a href="https://developers.google.com/chrome-developer-tools/docs/cpu-profiling">Chrome</a></li>
+              <li>
+                <p>tms 生成预热页面总是失败</p>
+                <div class="fragment">
+                  <p>设置 php 执行环境</p>
+                  <p>
+                  <pre style="resize:both"><code class="php" contenteditable>ini_set('memory_limit', -1);
+ini_set('max_input_time', 100000);
+ini_set('max_execution_time', 100000);
+set_time_limit(0);</code></pre>
+                  </p>
+                </div>
+              </li>
+
+              <li class="fragment">部分<a href="http://www.taobao.com/go/market/2012/1111/warmup.php">页面</a>收藏失败 <span class="fragment highlight-green floatInFast"><a href="https://developers.google.com/chrome-developer-tools/docs/scripts-breakpoints">debug</a></span></li>
+              <li class="fragment"><a href="ie6_damn_slow.html">ie6</a> 提示是否终止脚本 <span class="fragment highlight-green floatInFast"><a href="https://developers.google.com/chrome-developer-tools/docs/cpu-profiling">profile</a></span></li>
             </ol>
           </section>
         </section>
@@ -181,6 +181,16 @@
         <section>
           <h2>一些经验</h2>
           <ul>
+            <li>功能按钮等用钩子, 全局统一初始化(保证不报错)</li>
+            <li>内容在一个地方填写, 不划分区块 include</li>
+            <li>
+              <p>内容展现分离 <a href="http://tms.taobao.com/page/search_list.htm?search-txt=%C3%EB%C9%B1%C4%DA%C8%DD">秒杀内容</a></p>
+              <ul>
+                <li>很多区块填数据, 一个区块负责输出</li>
+                <li>方便统一修改 ui</li>
+              </ul>
+            </li>
+            <li>tms 1个小时缓存, <a href="http://tms.taobao.com/go/market/2012/1111/test.php">秒杀</a>异步加载</li>
             <li>不要用图片文字(楼层), 微软雅黑代替</li>
             <li>文案不要切图片</li>
           </ul>
