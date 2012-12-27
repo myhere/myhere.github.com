@@ -81,7 +81,7 @@
           <section>
             <h2>XSS</h2>
             <ul>
-              <li>Cross-site scripting </li>
+              <li>Cross-site scripting</li>
               <li>原理: 
               <p class="fragment">利用网页漏洞, 向网页里注入恶意 js, 用户浏览时执行恶意脚本</p>
               </li>
@@ -118,6 +118,20 @@
               <li>转义来自用户的数据: <span class="fragment">get, post, cookie</span></li>
               <li>用户内容中的 html 标签一定要转义为<a href="http://www.w3school.com.cn/html/html_entities.asp" target="_blank">实体字符</a></li>
               <li><pre style="resize:both"><code class="php" contenteditable>echo htmlspecialchars($_GET['tweet']);</code></pre></li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+
+          <section>
+            <h2>CSRF</h2>
+            <ul>
+              <li>Cross-site request forgery - 跨站请求伪造</li>
+              <li>原理: 
+              <p class="fragment">通过伪装来自受信任用户的请求来利用受信任的网站</p>
+              </li>
             </ul>
           </section>
 
