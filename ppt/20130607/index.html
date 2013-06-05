@@ -24,6 +24,9 @@
     </script>
 
 <style>
+*{
+  font-family: '微软雅黑' !important;
+}
 .floatInSlow,
 .floatInFast{
   position:relative;
@@ -70,19 +73,19 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
-          <h1>list 优化总结</h1>
+          <h2>list 优化总结</h2>
           <p>
             <small>by 林谦 @ 2013/6/7</small>
           </p>
         </section>
 
         <section>
-          <h2>先看几个数据:</h2>
+          <h3>先看几个数据:</h3>
           <p><a href="http://wiki.ued.taobao.net/doku.php?id=user:linqian.zl:list-optimize" title="更多数据"><img height="191" src="images/data.jpg" alt="" /></a></p>
         </section>
 
         <section>
-          <h2>目录</h2>
+          <h3>目录</h3>
           <ul>
             <li>开发环境优化</li>
             <li>template 预编译</li>
@@ -93,7 +96,7 @@
         </section>
 
         <section>
-          <h2>开发环境优化</h2>
+          <h3>开发环境优化</h3>
           <ul>
             <li>php 模拟环境</li>
             <li>模块独立为一个目录</li>
@@ -104,7 +107,7 @@
         </section>
 
         <section>
-          <h2>开发环境优化</h2>
+          <h3>开发环境优化</h3>
           <ul>
             <li>线上 bug 本地可以重现, 无需代理 assets</li>
             <li>模块更独立, html, css, js 放在一个目录</li>
@@ -112,7 +115,7 @@
         </section>
 
         <section>
-          <h2>预编译 - 模板的选择</h2>
+          <h3>预编译 - 模板的选择</h3>
           <ul>
             <li>kissy <a href="http://ued.taobao.com/blog/2012/10/%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF-dsl/">xtemplate</a>?</li>
             <li>handlerbars?</li>
@@ -125,7 +128,7 @@
         </section>
 
         <section>
-          <h2>预编译 - 怎么做</h2>
+          <h3>预编译 - 怎么做</h3>
           <ul>
             <li>html -> js -> kissy module</li>
             <li>grunt <a href="https://github.com/gruntjs/grunt-contrib-livereload">livereload</a> 插件</li>
@@ -134,17 +137,17 @@
         </section>
 
         <section>
-          <h2>分段执行 & 分段渲染</h2>
+          <h3>分段执行 & 分段渲染</h3>
           <ul>
             <li>模块渲染: data -> html -> set innerHTML</li>
-            <li>多个模块连续渲染 => 所有渲染结果一起显示</li>
+            <li>多个模块连续渲染 => 所有渲染完一起显示</li>
             <li>itemlist 模块分次渲染</li>
             <li>延迟渲染</li>
           </ul>
         </section>
 
         <section>
-          <h2>dom 查询</h2>
+          <h3>dom 查询</h3>
           <ul>
             <li>dom 查询是 js 里最慢的部分</li>
             <li>缓存 dom 节点, 赋给变量</li>
@@ -153,14 +156,14 @@
         </section>
 
         <section>
-          <h2>简化接口</h2>
+          <h3>简化接口</h3>
           <ul>
             <li>接口字段去重</li>
           </ul>
         </section>
 
         <section>
-            <h2>Thank You!</h2>
+            <h3>Thank You!</h3>
             <ul>
               <li><a href="http://wiki.ued.taobao.net/doku.php?id=user:linqian.zl:list-optimize">更多</a></li>
             </ul>
