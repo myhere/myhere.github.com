@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>list 优化总结</title>
+
+    <meta name="description" content="list 优化总结">
+    <meta name="author" content="张林">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="../vendor/reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="../vendor/reveal.js/css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../vendor/reveal.js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="../vendor/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+<style>
+.floatInSlow,
+.floatInFast{
+  position:relative;
+  left:200%;
+}
+.floatInSlow{
+	-webkit-transition: all 2s ease!important;
+	   -moz-transition: all 2s ease!important;
+	    -ms-transition: all 2s ease!important;
+	     -o-transition: all 2s ease!important;
+	        transition: all 2s ease!important;
+}
+.floatInSlow.visible,
+.floatInFast.visible{
+  left:0;
+}
+
+
+.alignLeft{
+  text-align:left;
+}
+
+.reveal .noAnimation span,
+.reveal .noAnimation:hover span {
+  transform:none;
+  -webkit-transform:none;
+  color:blue;
+  text-decoration:underline;
+  
+}
+
+</style>
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <base target="_blank" />
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>list 优化总结</h1>
+          <p>
+            <small>by 林谦 @ 2013/6/7</small>
+          </p>
+        </section>
+
+        <section>
+          <h2>先看几个数据:</h2>
+          <p><a href="http://wiki.ued.taobao.net/doku.php?id=user:linqian.zl:list-optimize" title="更多数据"><img height="191" src="images/data.jpg" alt="" /></a></p>
+        </section>
+
+        <section>
+          <h2>目录</h2>
+          <ul>
+            <li>开发环境优化</li>
+            <li>template 预编译</li>
+            <li>分段执行 & 分段渲染</li>
+            <li>dom 查询</li>
+            <li>简化接口</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>开发环境优化</h2>
+          <ul>
+            <li>php 模拟环境</li>
+            <li>模块独立为一个目录</li>
+            <li>模块文件拆分, 依赖动态载入</li>
+            <li>grunt 打包</li>
+            <li><a href="http://gitlab.alibaba-inc.com/linqian.zl/list/tree/master">gitlab</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>开发环境优化</h2>
+          <ul>
+            <li>线上 bug 本地可以重现, 无需代理 assets</li>
+            <li>模块更独立, html, css, js 放在一个目录</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>预编译 - 模板的选择</h2>
+          <ul>
+            <li>kissy <a href="http://ued.taobao.com/blog/2012/10/%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF-dsl/">xtemplate</a>?</li>
+            <li>handlerbars?</li>
+            <li>...</li>
+            <li>underscore</li>
+          </ul>
+          <p>
+            <a href="http://garann.github.io/template-chooser/">template chooser</a>
+          </p>
+        </section>
+
+        <section>
+          <h2>预编译 - 怎么做</h2>
+          <ul>
+            <li>html -> js -> kissy module</li>
+            <li>grunt <a href="https://github.com/gruntjs/grunt-contrib-livereload">livereload</a> 插件</li>
+            <li>监控 html/less/ => 刷新浏览器</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>分段执行 & 分段渲染</h2>
+          <ul>
+            <li>模块渲染: data -> html -> set innerHTML</li>
+            <li>多个模块连续渲染 => 所有渲染结果一起显示</li>
+            <li>itemlist 模块分次渲染</li>
+            <li>延迟渲染</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>dom 查询</h2>
+          <ul>
+            <li>dom 查询是 js 里最慢的部分</li>
+            <li>缓存 dom 节点, 赋给变量</li>
+            <li>使用 id 选择器(对循环中查询尤其有效)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>简化接口</h2>
+          <ul>
+            <li>接口字段去重</li>
+          </ul>
+        </section>
+
+        <section>
+            <h2>Thank You!</h2>
+            <ul>
+              <li><a href="http://wiki.ued.taobao.net/doku.php?id=user:linqian.zl:list-optimize">更多</a></li>
+            </ul>
+        </section>
+      </div>
+
+    </div>
+
+    <script src="../vendor/reveal.js/lib/js/head.min.js"></script>
+    <script src="../vendor/reveal.js/js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'page', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          // { src: '../vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          // { src: '../vendor/reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          // { src: '../vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../vendor/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          // { src: '../vendor/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          // { src: '../vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
