@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title></title>
+
+    <meta name="description" content="list 优化总结">
+    <meta name="author" content="张林">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="../vendor/reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="../vendor/reveal.js/css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../vendor/reveal.js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="../vendor/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+<style>
+*{
+  font-family: '微软雅黑' !important;
+}
+.floatInSlow,
+.floatInFast{
+  position:relative;
+  left:200%;
+}
+.floatInSlow{
+	-webkit-transition: all 2s ease!important;
+	   -moz-transition: all 2s ease!important;
+	    -ms-transition: all 2s ease!important;
+	     -o-transition: all 2s ease!important;
+	        transition: all 2s ease!important;
+}
+.floatInSlow.visible,
+.floatInFast.visible{
+  left:0;
+}
+
+
+.alignLeft{
+  text-align:left;
+}
+
+.reveal .noAnimation span,
+.reveal .noAnimation:hover span {
+  transform:none;
+  -webkit-transform:none;
+  color:blue;
+  text-decoration:underline;
+  
+}
+
+</style>
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <base target="_blank" />
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h2>list 前端设计方案</h2>
+          <p>
+            <small>- 林谦 @ 2013/6/20</small>
+          </p>
+        </section>
+
+        <section>
+          <h2>目录</h2>
+          <ul>
+            <li>整体设计</li>
+            <li>模块组成</li>
+            <li>性能&调试</li>
+            <li>A/B Test管理</li>
+            <li>皮肤管理</li>
+            <li>打包</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>整体设计</h2>
+          <p>app + mods</p>
+          <p><img src="images/frontend-design.png" height="405" alt="" /></p>
+          <p><a href="http://gitlab.alibaba-inc.com/linqian.zl/list/tree/ab_pro">repository</a></p>
+        </section>
+
+        <section>
+          <h2>整体设计</h2>
+          <ul>
+            <li>app: 负责模块公用的功能:<br /> 事件绑定、数据请求、黄金令箭、url 处理</li>
+            <li>mod: render</li>
+            <li>页面初始化过程:
+              <ul>
+                <li>初始化 app</li>
+                <li>app 请求数据</li>
+                <li>找到页面中模块, 初始化各个模块</li>
+                <li>将模块添加到 app 中</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>模块组成</h2>
+          <ul>
+            <li>vm 中模块标示<br /><img class="fragment" src="images/mod-placeholder.JPG" alt="" /></li>
+            <li>css/js</li>
+            <li>less -> css</li>
+            <li>html 模板 -> js</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>模块组成 - 优点</h2>
+          <ul>
+            <li>模块所有文件独立集中</li>
+            <li>html tmpl 移到 js 中缓存起来</li>
+            <li>维护方便</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>性能&调试</h2>
+          <ul>
+            <li>?ks-debug 各个模块渲染时间统计</li>
+            <li>延迟渲染&分批渲染</li>
+            <li><a href="https://developers.google.com/chrome-developer-tools/">chrome</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>A/B Test 管理</h2>
+          <ul>
+            <li>A/B 版本对应 git 分支</li>
+            <li>不同版本在打包时打包出对应文件</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>皮肤管理</h2>
+          <ul>
+            <li>less</li>
+            <li>所有模块可变部分设置为变量</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>打包</h2>
+          <ul>
+            <li>node grunt 工具</li>
+            <li>less 编译</li>
+            <li>html tmpl -> js</li>
+            <li>css/js 合并</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>thanks!</h2>
+        </section>
+      </div>
+
+    </div>
+
+    <script src="../vendor/reveal.js/lib/js/head.min.js"></script>
+    <script src="../vendor/reveal.js/js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'page', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          // { src: '../vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          // { src: '../vendor/reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          // { src: '../vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../vendor/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          // { src: '../vendor/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          // { src: '../vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
