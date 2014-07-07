@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hesper 异步化</title>
+
+    <meta name="description" content="Hesper 异步化">
+    <meta name="author" content="张林">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="../vendor/reveal.js/css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../vendor/reveal.js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="../vendor/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+    *{
+      font-family: '微软雅黑' !important;
+    }
+    .floatInSlow,
+    .floatInFast{
+      position:relative;
+      left:200%;
+    }
+    .floatInSlow{
+      -webkit-transition: all 2s ease!important;
+         -moz-transition: all 2s ease!important;
+          -ms-transition: all 2s ease!important;
+           -o-transition: all 2s ease!important;
+              transition: all 2s ease!important;
+    }
+    .floatInSlow.visible,
+    .floatInFast.visible{
+      left:0;
+    }
+
+
+    .alignLeft{
+      text-align:left;
+    }
+
+    .reveal .noAnimation span,
+    .reveal .noAnimation:hover span {
+      transform:none;
+      -webkit-transform:none;
+      color:blue;
+      text-decoration:underline;
+      
+    }
+  </style>
+  <base target="_blank" />
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h2 style="text-transform:none;">Hesper 异步化</h2>
+          <p>- 林谦 @ 淘宝搜索</p>
+        </section>
+
+        <section>
+          <h2>目录</h2>
+
+          <ul>
+            <li>同步 or 异步</li>
+            <li>异步实现方案</li>
+            <li>性能优化</li>
+            <li>多终端实践</li>
+          </ul>
+
+        </section>
+
+        <section>
+          <h3>同步 or 异步</h3>
+
+          <ul>
+            <li>开发模式</li>
+            <li>维护成本</li>
+            <li>体验</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>同步开发流程</h3>
+
+          <ul>
+            <li>前端写 demo</li>
+            <li>开发套页面, vm. 数据</li>
+            <li>联调出 bug
+              <ul>
+                <li>改 demo</li>
+                <li>改 vm</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>同步开发中的问题!</h3>
+
+          <ul>
+            <li>demo 要经过开发修改</li>
+            <li>前后端分离不彻底</li>
+            <li>前端没有独立开发环境</li>
+            <li>java 开发环境前端搭建成本高</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>异步开发模式</h3>
+
+          <ul>
+            <li>前端写 html</li>
+            <li>后端提供数据</li>
+            <li>联调数据接口</li>
+            <li>联调出 bug
+              <ul>
+                <li>后端盖接口</li>
+                <li>前端改 html</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>异步开发优点</h3>
+
+          <ul>
+            <li>前后端分离</li>
+            <li>前端有独立开发环境</li>
+
+            <li class="fragment">响应式</li>
+            <li class="fragment">图片retina</li>
+            <li class="fragment">多终端</li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h3>异步实现方案</h3>
+
+          <ul>
+            <li>html 前移, 包括 layout</li>
+            <li>assets 前端加载</li>
+            <li>ui 组件化</li>
+            <li>数据接口约定</li>
+          </ul>
+        </section>
+
+
+        <section>
+          <img src="images/frontend-design.png" alt="" />
+          <p>app + mods</p>
+
+        </section>
+
+        <section>
+          <img src="images/file-structure.png" alt="" />
+        </section>
+
+        <section>
+          <h3>性能优化</h3>
+
+          <ul>
+            <li>模板模块化, 预编译</li>
+            <li>
+              渲染优化
+              <ul>
+                <li>页面渲染分段</li>
+                <li>组件内部分次渲染</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>多终端实践</h3>
+
+          <ul>
+            <li>后端修改数据接口</li>
+            <li>前端替换 ui 组件</li>
+          </ul>
+        </section>
+
+
+      </div>
+    </div>
+
+    <script src="../vendor/reveal.js/lib/js/head.min.js"></script>
+    <script src="../vendor/reveal.js/js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          // { src: '../vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          // { src: '../vendor/reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          // { src: '../vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../vendor/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          // { src: '../vendor/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          // { src: '../vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+  </body>
+</html>
+
+
