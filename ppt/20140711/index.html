@@ -63,6 +63,10 @@
       text-decoration:underline;
       
     }
+
+    .text-no-transform{
+      text-transform:none!important;
+    }
   </style>
   <base target="_blank" />
   </head>
@@ -74,7 +78,7 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
-          <h2 style="text-transform:none;">Hesper 异步化</h2>
+          <h2 class="text-no-transform">Hesper 异步化</h2>
           <p>- 林谦 @ 淘宝搜索</p>
         </section>
 
@@ -160,18 +164,25 @@
           <h3>异步实现方案</h3>
 
           <ul>
-            <li>html 前移, 包括 layout</li>
-            <li>assets 前端加载</li>
-            <li>ui 组件化</li>
-            <li>数据接口约定</li>
+            <li>前端方案
+              <ul>
+                <li>ui 模块化</li>
+                <li>ui 模块独立, 可插拔</li>
+              </ul>
+            </li>
+            <li>数据接口
+              <ul>
+                <li>字段与 ui 模块的约定</li>
+              </ul>
+            </li>
           </ul>
         </section>
 
 
         <section>
-          <img src="images/frontend-design.png" alt="" />
+          <h3>前端设计</h3>
           <p>app + mods</p>
-
+          <img src="images/frontend-design.png" alt="" />
         </section>
 
         <section>
@@ -179,17 +190,86 @@
         </section>
 
         <section>
-          <h3>性能优化</h3>
+          <img src="images/uml.png" alt="" />
+          <p>mod 都是相同的, 不知道彼此存在</p>
+        </section>
+
+        <section>
+          <h3 class="text-no-transform">app</h3>
+          <ul>
+            <li>渲染页面各个容器</li>
+            <li>管理页面中 ui 模块, 调用 mod.render</li>
+            <li>模块间通信机制: 广播/收听</li>
+            <li>异步点击事件绑定</li>
+            <li>history 管理</li>
+            <li>请求数据</li>
+            <li>其他公共功能</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="text-no-transform">mods</h3>
+          <ul>
+            <li>doRender 渲染自己</li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h3>前端渲染流程</h3>
 
           <ul>
-            <li>模板模块化, 预编译</li>
-            <li>
-              渲染优化
+            <li>初始化 app 对象</li>
+            <li>app 对象写入模块占位符</li>
+            <li>初始化各个 mod 对象, 并挂到 app 对象上去</li>
+            <li>app 请求接口</li>
+            <li>数据回来后 app 调用 mod.render </li>
+            <li>mod.render 渲染自己</li>
+          </ul>
+        </section>
+
+
+        <section>
+          <a href="http://19te-tb-tsrp-awesome.cdef.taobao.net/docs/design/demo.html.html">
+            <img src="images/render.png" alt="" />
+          </a>
+        </section>
+
+        <section>
+          <h3>优化</h3>
+
+          <ul>
+            <li>性能统计: 模块渲染时间</li>
+            <li>模板模块化: 预编译</li>
+            <li>渲染优化: innerHTML 最耗时
               <ul>
                 <li>页面渲染分段</li>
                 <li>组件内部分次渲染</li>
               </ul>
             </li>
+            <li>
+              js dom 操作
+              <ul>
+                <li>#idSelector</li>
+                <li>缓存 dom 查找</li>
+                <li>缓存 show/hide</li>
+              </ul>
+            </li>
+            <li>容错
+              <ul>
+                <li>一个 mod 报错, 不影响其他 mod</li>
+              </ul>
+           </li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h3>接口约定</h3>
+
+          <ul>
+            <li>传递当前参数 + 改变的参数</li>
+            <li>模块是否渲染约定</li>
           </ul>
         </section>
 
