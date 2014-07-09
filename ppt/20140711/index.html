@@ -213,6 +213,21 @@
           <h3 class="text-no-transform">mods</h3>
           <ul>
             <li>doRender 渲染自己</li>
+            <li>包括
+              <ul>
+                <li>js</li>
+                <li>css</li>
+                <li>html</li>
+              </ul>
+            </li>
+            <li>组织 => 内聚
+              <ul>
+                <li>每个模块一个入口文件 index.js</li>
+                <li>index.js require css</li>
+                <li>index.js require html</li>
+              </ul>
+            </li>
+            <li>一个模块对外只公布一个入口文件</li>
           </ul>
         </section>
 
