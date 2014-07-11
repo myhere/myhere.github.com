@@ -168,11 +168,13 @@
               <ul>
                 <li>ui 模块化</li>
                 <li>ui 模块独立, 可插拔</li>
+                <li>ui 模块 assets 线上 combo, 按需加载</li>
               </ul>
             </li>
             <li>数据接口
               <ul>
                 <li>字段与 ui 模块的约定</li>
+                <li>一个数据字段对应一个 ui 模块</li>
               </ul>
             </li>
           </ul>
@@ -202,7 +204,13 @@
             <li>渲染页面各个容器</li>
             <li>管理页面中 ui 模块, 调用 mod.render</li>
             <li>模块间通信机制: 广播/收听</li>
-            <li>异步点击事件绑定</li>
+            <li>异步点击事件绑定
+              <ul>
+                <li>代理绑定, mod 调用绑定函数</li>
+                <li>约定绑定, .J_Ajax</li>
+                <li>参数与接口约定</li>
+              </ul>
+            </li>
             <li>history 管理</li>
             <li>请求数据</li>
             <li>其他公共功能</li>
@@ -281,12 +289,28 @@
           </ul>
         </section>
 
+        <section>
+          <h3>性能与同步对比</h3>
+
+          <ul>
+            <li>这个目前没有数据</li>
+            <li></li>
+          </ul>
+        </section>
+
 
         <section>
           <h3>接口约定</h3>
 
           <ul>
             <li>传递当前参数 + 改变的参数</li>
+            <li>改变的参数:
+              <ul>
+                <li>data-key</li>
+                <li>data-value</li>
+                <li>data-action</li>
+              </ul>
+            </li>
             <li>模块是否渲染约定</li>
             <li><a href="http://dip.taobao.net/#/">数据接口平台</a></li>
           </ul>
@@ -296,8 +320,11 @@
           <h3>多终端实践</h3>
 
           <ul>
+            <li>
+            <img src="images/qr.png" alt="" /> </li>
             <li>后端修改数据接口</li>
             <li>前端替换 ui 组件</li>
+            <li><a href="http://github.zhangl.in/ppt/20140110/index.html#/">特殊优化</a></li>
           </ul>
         </section>
 
